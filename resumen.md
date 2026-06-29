@@ -1,5 +1,5 @@
 # STATTOOS SOCIETY — Resumen del Proyecto
-**Actualizado:** 2026-06-28 · 21:47 (UTC-5)
+**Actualizado:** 2026-06-29 · 18:52 (UTC-5)
 
 ---
 
@@ -16,22 +16,15 @@
 | Archivo | Descripción |
 |---|---|
 | `index.html` | Estructura HTML completa del sitio (SPA) |
-| `style.css` | Todos los estilos (~3038 líneas) |
-| `app.js` | Toda la lógica JavaScript (~692 líneas) |
+| `style.css` | Todos los estilos (~3193 líneas) |
+| `app.js` | Toda la lógica JavaScript (~710 líneas) |
 | `LOGO-STATTOOS.png` | Logo original (se renderiza con `filter: brightness(0) invert(1)`) |
-| `frank.jpg` | Foto del artista Frankliin |
+| `frank.jpg` | Foto del artista Franklin |
 | `saris.jpg` | Foto de la artista Saris Toro |
-| `../TATTOO/` | Carpeta con 8 imágenes para el film strip (ruta relativa desde el sitio) |
-
-### Imágenes del Film Strip (`D:\MANGO FILMS 2026\STATTOOS\WEBSITE\TATTOO\`)
-1. `658955318_27020283830906649_5090289939039690665_n.jpg`
-2. `673679131_27284668601134836_5800676656137250742_n.jpg`
-3. `673962307_27284668577801505_1704395994635659186_n.jpg`
-4. `674085888_27284668437801519_5840378755391095688_n.jpg`
-5. `674196641_27284668341134862_6073177844151814818_n.jpg`
-6. `678988292_27375250502076645_2096502396638677993_n.jpg`
-7. `723228908_18580349938062266_7524056536623623397_n.jpg`
-8. `731339033_28113706961564325_41816633548126_n.jpg`
+| `ear_model_v2.glb` | Modelo 3D de la oreja para la sección de piercings |
+| `tattoo/` | Carpeta con 8 imágenes del film strip de Inicio |
+| `tattoo_sara_002/` | Carpeta con 23 imágenes del portafolio de Saris Toro |
+| `convenciones_images/` | Posters oficiales de las ediciones del festival (2026, 2024, 2022) |
 
 ---
 
@@ -55,123 +48,88 @@
 |---|---|
 | `#home` | Página principal (hero + artistas + film strip + CTA) |
 | `#artists` | Grid filtrable de artistas |
-| `#artist-profile` | Perfil detallado de artista base (Elara Vance) |
-| `#artist-frank` | Perfil detallado del artista Franklin (mural masonry a color) |
-| `#piercings` | Galería de perforaciones |
-| `#conventions` | Timeline de convenciones |
-| `#booking` | Formulario de cita |
+| `#artist-frank` | Perfil de Franklin (mural masonry, color, full width) |
+| `#artist-saris` | Perfil de Saris Toro (mural masonry, color, full width) |
+| `#piercings` | Infografía interactiva 3D con model-viewer |
+| `#conventions` | Timeline interactivo y parallax de Ink The Garden City |
+| `#booking` | Formulario de cita con mapa interactivo de hologramas |
 
 ---
 
 ## Componentes Implementados
 
-### 1. Preloader — Three.js GLSL Shader ✅ (NUEVO)
-- **Tecnología:** Three.js r89 (CDN ya en `<head>`) + WebGL fragment shader
-- **Efecto:** Líneas procedurales animadas con tinte rojo dominante
-- **Shader:** `r = color[2]*2.5 + color[1]*0.3`, `g = color[1]*0.12`, `b = color[0]*0.05`
-- **Timing:** Negro sólido + logo inmediato → shader fade-in a 0.5s (delay 0.1s) → fade-out completo a los 2.8s → cleanup Three.js
-- **CSS clave:** `#intro-preloader { opacity:1 }` / `#shader-container { opacity:0; animation: shader-fadein 0.5s ease 0.1s forwards }`
-- **Función JS:** `initShaderPreloader()` en `app.js` línea ~62
+### 1. Preloader — Three.js GLSL Shader ✅
+- **Tecnología:** Three.js r89 + WebGL fragment shader.
+- **Efecto:** Líneas procedurales animadas con tinte rojo dominante.
+- **Bypass:** Si el hash de la URL al momento de la carga no es `#home` o está vacío, el preloader se oculta inmediatamente, evitando esperas innecesarias en páginas secundarias.
 
-### 2. Header / Navbar — Glassmorphism ✅
-- `backdrop-filter: blur(20px)`, fondo negro semitransparente
-- Borde inferior rojo sutil, botón "BOOK NOW" rojo pill
-- Menú hamburguesa mobile con SVG animado
+### 2. Header / Navbar — Glassmorphic ✅
+- `backdrop-filter: blur(20px)`, fondo negro semitransparente con borde inferior rojo y botón "BOOK NOW" tipo píldora.
+- Soporta menú hamburguesa en mobile con auto-cierre automático al hacer clic en cualquier enlace.
 
-### 3. Hero Section ✅
-- Video YouTube `EtTl2sXKKYA` como fondo (iframe escalado)
-- Overlay negro + gradiente rojo sutil
-- Texto: "MAKING FRIENDS / NO CLIENTS" (NO en rojo)
+### 3. Hero Section (Home) ✅
+- Video YouTube `EtTl2sXKKYA` de fondo con controles desactivados y reproducción automática en móviles.
+- Overlay negro y gradiente rojo para una legibilidad premium.
 
 ### 4. Sección: CONOCE A NUESTROS ARTISTAS ✅
-- 2 tarjetas cinematográficas (Frankliin, Saris Toro)
-- Hover: grayscale → color, escala, sombra roja
-- Botón "VER PORTAFOLIO" con animación slide
+- Tarjetas interactivas con transición grayscale → color y efecto hover con sombra roja 3D.
 
-### 5. Sección: TRABAJOS — Film Strip Infinito ✅ (NUEVO - reemplazó carrusel 3D)
-- **HTML:** `#film-strip-wrapper` → `#film-strip-track` → 16 `.film-strip-item` (8 + 8 clonadas)
-- **Auto-scroll:** `speed = 0.6px/frame` via `requestAnimationFrame`
-- **Loop infinito:** cuando `offset >= setWidth` (ancho de un set) → `offset -= setWidth`
-- **Drag mouse:** mousedown/mousemove/mouseup en `window`. Inertia: `velocity *= 0.94`
-- **Drag touch:** touchstart/touchmove/touchend con `{ passive: true }`
-- **Pausa en hover:** `speed = 0` al entrar, `speed = 0.6` al salir
-- **CSS:** bordes rojos tipo carrete, fade lateral con `::before/::after` gradientes, `cursor: grab`
-- **Función JS:** `initGalleryCarousel()` (mismo nombre, nueva lógica) en `app.js` línea ~242
+### 5. Sección: TRABAJOS — Film Strip Infinito ✅
+- Auto-scroll continuo con pausa en hover y soporte total de drag manual (mouse y touch inertia).
 
-### 6. Sección: AGENDA TU CITA (CTA Premium) ✅
-- Tarjeta glassmorphism + canvas interactivo de partículas
-- Botón WhatsApp: `https://wa.link/k4isuj`
+### 6. Fondo Unificado (Unified BG Zone) ✅
+- Canvas único con haces de luz diagonales animados por IntersectionObserver.
 
-### 7. Background Unificado ✅
-- `.unified-bg-zone` cubre Artistas + Galería + CTA
-- Canvas único con haces de luz roja diagonal (10 beams desktop, 5 mobile)
-- Glow radial central respirante, activado por IntersectionObserver
+### 7. Perfiles de Artistas Dinámicos (Franklin y Saris Toro) ✅
+- Portafolios a pantalla completa sin márgenes anchos (3 columnas en desktop, 2 en tablet, 1 en mobile).
+- Mantienen proporciones de imagen estables y cargan dinámicamente mediante arrays de imágenes y el visor lightbox global.
 
-### 8. Footer ✅ (estructura básica — rediseño PENDIENTE)
-- 4 columnas: Brand, Society, Connect, The Studio
+### 8. Perforaciones — Infografía 3D Interactiva ✅ (NUEVO)
+- **Tecnología:** Google `<model-viewer>` + modelo GLB optimizado (`ear_model_v2.glb`).
+- **Hotspots:** 9 puntos (Helix, Mid Helix, Flat, Rook, Forward Helix, Daith, Tragus, Conch, Lóbulo) con tooltips glassmorphism y detalles de sanación y joyería.
+- **Física:** Rotación 3D sutil guiada por el cursor (mousemove) y rotación automática pausada al interactuar.
 
----
-
-## Funciones JavaScript en `app.js`
-
-| Función | Línea aprox. | Descripción |
-|---|---|---|
-| `initShaderPreloader()` | ~62 | Preloader Three.js GLSL con tinte rojo |
-| `initRouter()` | ~200 | SPA hash-based routing |
-| `initMobileMenu()` | ~215 | Hamburger menu |
-| `initScrollEffects()` | ~225 | Header shrink en scroll |
-| `initSovereigntyFilters()` | ~235 | Filtros de artistas |
-| `initGalleryCarousel()` | ~242 | Film strip infinito + drag |
-| `initGalleryLightbox()` | ~360 | Lightbox de imágenes |
-| `initInteractiveForms()` | ~380 | Formulario booking |
-| `initCtaParticles()` | ~420 | Partículas interactivas CTA |
-| `initUnifiedBackground()` | ~500 | Canvas haces rojos unificado |
-
----
-
-## CSS — Secciones Clave en `style.css`
-
-| Línea aprox. | Sección |
-|---|---|
-| ~80 | Preloader styles (`#intro-preloader`, `#shader-container`, `@keyframes shader-fadein`) |
-| ~135 | Utilidades globales |
-| ~809 | Gallery section + unified-bg-zone |
-| ~867 | Film strip CSS (`.film-strip-wrapper`, `.film-strip-track`, `.film-strip-item`) |
-| ~960 | Lightbox overlay |
+### 9. Convenciones — Timeline Inmersivo ✅ (NUEVO)
+- **Hero:** Video YouTube de fondo (`mdHY0jWpDoI`), caja de texto glassmorphic y scroll indicator animado.
+- **Timeline:** Ediciones 2026, 2024, 2022 representadas por posters verticales completos sin recortar (`object-fit: contain`).
+- **Línea de Progreso:** Línea vertical central que crece proporcionalmente según el progreso del scroll del usuario.
+- **Scroll Reveal:** Tarjetas con entrada sincronizada fade-in, scale y un sutil efecto parallax en las imágenes.
 
 ---
 
 ## Tareas Completadas (Historial)
 
-- [x] Preloader con animación Three.js GLSL + tinte rojo + fade-in suave
-- [x] Fade-in: negro sólido inmediato, solo shader canvas hace transición
-- [x] Film Strip infinito con drag (reemplazó carrusel 3D)
-- [x] Background animado unificado (haces rojos diagonales)
-- [x] CTA glassmorphism con canvas partículas
-- [x] Spacing responsive con `clamp()`
-- [x] Creación de página del perfil de Franklin (#artist-frank) con portafolio dinámico a todo color y masonry estilo mural
-- [x] Corrección de rutas de imágenes (Film Strip) para producción en Cloudflare
-- [x] Habilitación y corrección de reproducción automática del video Hero en navegadores móviles
-- [x] Corrección del menú de navegación móvil (apertura, navegación y auto-cierre)
+- [x] Preloader Three.js GLSL con bypass automático en subpáginas.
+- [x] Film Strip infinito con drag e inertia en Home.
+- [x] Creación de página del perfil de Franklin (`#artist-frank`) con portafolio dinámico masonry.
+- [x] Creación de la página Saris Toro (`#artist-saris`) duplicando el layout y portafolio dinámico de 23 imágenes.
+- [x] Eliminación de "Rol: Piercer" en Saris Toro.
+- [x] Configuración de portafolios a pantalla completa en 3/2/1 columnas para ambos artistas.
+- [x] Corrección de comportamiento global de navegación: scroll-to-top forzado al recargar y navegar hashes.
+- [x] Integración de model-viewer 3D interactivo en la página de piercings con 9 hotspots descriptivos.
+- [x] Rediseño de Convenciones con timeline dinámico, posters verticales completos y video YouTube de fondo.
+- [x] Eliminación de la sección redundante "JOIN THE CIRCLE" en Convenciones.
+- [x] Limpieza del repositorio eliminando assets 3D/video temporales pesados y no utilizados.
 
 ---
 
 ## 🔄 Próximas Tareas
 
 - [ ] **Footer — Rediseño Completo** (PRIORIDAD)
-  - Col 1: "Estudio con +20 años de experiencia..." + © 2024 STATTOOS SOCIETY
-  - Col 2: Mapa del sitio (Inicio, Artistas, Trabajos, Perforaciones, Agenda)
-  - Col 3: Redes sociales glass (Instagram: https://www.instagram.com/stattoos593/ / Facebook: https://www.facebook.com/stattoos593)
-  - Col 4: Ubicación "Babacos y Guaytambos, Ambato, Ecuador" + botón "CÓMO LLEGAR" → https://maps.app.goo.gl/BeNCpcNQctP7bwMeA
-- [ ] Sección Testimonios / Reseñas
-- [ ] SEO meta tags + Open Graph
-- [ ] Performance en mobile real
+  - Col 1: Información de marca + copyright.
+  - Col 2: Mapa del sitio interactivo.
+  - Col 3: Iconos de redes sociales con efecto glassmorphism.
+  - Col 4: Dirección del estudio + botón de Google Maps "CÓMO LLEGAR".
+- [ ] Sección Testimonios / Reseñas de clientes.
+- [ ] SEO meta tags + Open Graph.
+- [ ] Ajustes finales de rendimiento mobile.
 
 ---
 
 ## Últimos Cambios (Changelog)
 
-* **Corrección de Menú de Navegación Móvil:** Se alineó el JavaScript con el archivo de estilos CSS al cambiar el toggling de la clase `mobile-open` a `active` sobre `#nav-menu`, permitiendo que el menú se abra y se auto-cierre al tocar cualquier enlace.
-* **Autoplay de Video Hero en Móviles:** Se eliminó la regla CSS (`display: none`) que ocultaba el iframe en pantallas pequeñas y se añadieron los atributos y parámetros de reproducción en línea (`playsinline=1` en URL, y atributos HTML como `playsinline`, `webkit-playsinline`, `autoplay`, `muted`, `loop`, `preload="auto"`) al iframe del video Hero de YouTube.
-* **Corrección de Rutas de Imágenes:** Se corrigió la ruta de las imágenes del Film Strip de la página de Inicio, reemplazando `../TATTOO/` por la ruta local correcta del proyecto `tattoo/` para garantizar su carga en Cloudflare Pages.
-* **Creación de Repositorio en GitHub:** Proyecto subido y alojado en la dirección `https://github.com/mangocontaec/stattos2026` para conexión automática con el hosting.
+* **Rediseño de Convenciones e Integración de Video:** Se implementó un timeline de 3 ediciones con posters verticales completos, línea de progreso interactiva en scroll y video de fondo YouTube en loop (`mdHY0jWpDoI`) configurado desde el segundo 2.
+* **Infografía 3D de Oreja en Piercings:** Se configuró el elemento de model-viewer con el asset optimizado `ear_model_v2.glb`, dotado de 9 hotspots interactivos con tooltips informativos de sanación y joyería.
+* **Corrección de Carga y Navegación:** Se configuró `history.scrollRestoration = 'manual'` para forzar scroll-to-top global al recargar o cambiar de sección, y se implementó un bypass en `app.js` para saltar el preloader 3D si la ruta de entrada no es la Home.
+* **Páginas de Artistas Optimizadas:** Se creó la ruta de Saris Toro con 23 imágenes y se actualizaron ambos perfiles de artistas para mostrar un portafolio de pantalla completa en cuadrícula de 3 columnas (desktop) / 2 columnas (tablet) / 1 columna (mobile).
+* **Limpieza de Repositorio:** Se eliminaron los archivos grandes `conventions_bg.mp4` y `ear_model.glb` para optimizar el tamaño de la base del repositorio y evitar límites de subida de GitHub.

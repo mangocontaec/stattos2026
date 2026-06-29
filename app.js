@@ -3,7 +3,13 @@
    Single Page Application Router, UI interactions, Animations, Globe
    ========================================================================== */
 
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
     initShaderPreloader();
     initRouter();
     initMobileMenu();
@@ -29,7 +35,7 @@ function initRouter() {
         const pageName = hash.replace('#', '');
 
         let navPage = pageName;
-        if (pageName === 'artist-profile' || pageName === 'artist-frank') navPage = 'artists';
+        if (pageName === 'artist-profile' || pageName === 'artist-frank' || pageName === 'artist-saris') navPage = 'artists';
 
         // Show/hide sections
         sections.forEach(sec => {
@@ -51,6 +57,8 @@ function initRouter() {
             setTimeout(() => initBookingGlobe(), 300);
         } else if (pageName === 'artist-frank') {
             initFranklinPortfolio();
+        } else if (pageName === 'artist-saris') {
+            initSarisPortfolio();
         }
     }
 
@@ -68,6 +76,51 @@ const FRANKLIN_IMAGES = [
     '723228908_18580349938062266_7524056536623623397_n.jpg',
     '731339033_28113706961564325_41816633548126_n.jpg'
 ];
+
+const SARIS_IMAGES = [
+    'WhatsApp Image 2026-06-29 at 17.27.37 (1).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.37 (2).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.37 (3).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.37.jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.38 (1).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.38 (2).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.38 (3).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.38 (4).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.38.jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.39 (1).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.39 (2).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.27.39.jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.15.jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.16 (1).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.16 (2).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.16.jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.17 (1).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.17 (2).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.17.jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.21.jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.22 (1).jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.22.jpeg',
+    'WhatsApp Image 2026-06-29 at 17.32.23.jpeg'
+];
+
+function initSarisPortfolio() {
+    const grid = document.getElementById('saris-portfolio-grid');
+    if (!grid || grid.children.length > 0) return; // avoid duplicate load
+
+    SARIS_IMAGES.forEach(imgName => {
+        const item = document.createElement('div');
+        item.className = 'profile-portfolio-item saris-portfolio-item';
+        
+        const img = document.createElement('img');
+        img.src = 'tattoo_sara_002/' + imgName;
+        img.alt = 'Tattoo Work Saris Toro';
+        img.loading = 'lazy';
+        img.style.cursor = 'pointer';
+        
+        item.appendChild(img);
+        grid.appendChild(item);
+    });
+}
 
 function initFranklinPortfolio() {
     const grid = document.getElementById('frank-portfolio-grid');
@@ -95,6 +148,13 @@ function initShaderPreloader() {
     const preloader = document.getElementById('intro-preloader');
     const container  = document.getElementById('shader-container');
     if (!preloader || !container) return;
+
+    // Check route and skip preloader if not on Home/main page
+    const hash = window.location.hash;
+    if (hash && hash !== '#home' && hash !== '#') {
+        preloader.style.display = 'none';
+        return;
+    }
 
     // Three.js is already loaded via CDN in <head>
     // Fallback to canvas if THREE not available
@@ -453,6 +513,8 @@ function initGalleryLightbox() {
         const target = e.target;
         if (target && target.tagName === 'IMG') {
             const isGalleryImg = target.closest('.film-strip-item') || 
+                                 target.closest('.frank-portfolio-item') ||
+                                 target.closest('.saris-portfolio-item') ||
                                  target.classList.contains('timeline-main-img');
             if (isGalleryImg) {
                 lightboxImg.src = target.src;
