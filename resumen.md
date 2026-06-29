@@ -1,11 +1,13 @@
 # STATTOOS SOCIETY — Resumen del Proyecto
-**Actualizado:** 2026-06-28 · 18:19 (UTC-5)
+**Actualizado:** 2026-06-28 · 21:47 (UTC-5)
 
 ---
 
 ## Estado General
-✅ Proyecto completamente funcional corriendo en `http://localhost:8080`  
-📁 Ruta: `d:\MANGO FILMS 2026\STATTOOS\WEBSITE\stitch_stattoos_society_digital_studio\`
+✅ Proyecto completamente funcional corriendo en `http://localhost:8080` (Iniciar localmente ejecutando `node server.js`).
+📁 Ruta Local: `d:\MANGO FILMS 2026\STATTOOS\WEBSITE\stitch_stattoos_society_digital_studio\`
+🐙 Repositorio GitHub: `https://github.com/mangocontaec/stattos2026`
+🌐 Cloudflare Ready: Listo para conectar el repositorio con Cloudflare Pages.
 
 ---
 
@@ -148,6 +150,9 @@
 - [x] CTA glassmorphism con canvas partículas
 - [x] Spacing responsive con `clamp()`
 - [x] Creación de página del perfil de Franklin (#artist-frank) con portafolio dinámico a todo color y masonry estilo mural
+- [x] Corrección de rutas de imágenes (Film Strip) para producción en Cloudflare
+- [x] Habilitación y corrección de reproducción automática del video Hero en navegadores móviles
+- [x] Corrección del menú de navegación móvil (apertura, navegación y auto-cierre)
 
 ---
 
@@ -160,16 +165,13 @@
   - Col 4: Ubicación "Babacos y Guaytambos, Ambato, Ecuador" + botón "CÓMO LLEGAR" → https://maps.app.goo.gl/BeNCpcNQctP7bwMeA
 - [ ] Sección Testimonios / Reseñas
 - [ ] SEO meta tags + Open Graph
-- [ ] Verificar autoplay video hero en todos los browsers
 - [ ] Performance en mobile real
 
 ---
 
 ## Últimos Cambios (Changelog)
 
-* **Creación de la Página del Artista Franklin (#artist-frank):** Nueva sección SPA con portafolio mural editorial a color y proporciones de aspecto nativo sin espaciados (gap 0, border-radius 0), heredando el fondo WebGL2 de humo.
-* **Creación del Directorio de Artistas (#artists):** Nueva página que clona las tarjetas de artistas del Home (Frankliin y Saris Toro) con sus enlaces funcionales y añade un banner de reservas (Booking CTA) con estilo dark luxury y botón rojo redondeado.
-* **Re-vinculación de Perfiles:** Corregidos enlaces dinámicos en las tarjetas de Franklin en Home y el directorio para apuntar al nuevo hash `#artist-frank` mediante JavaScript y HTML.
-* **Optimización y Persistencia del Fondo WebGL:** Se unificó el fondo animado WebGL2 mediante un único canvas global posicionado en la raíz (`<body>`) y estilos de transparencia global en CSS. Esto resolvió la pérdida de visibilidad y cuelgues de contexto durante la navegación por hash de la SPA.
-* **Remoción de Capas Negras de Fondo:** Se establecieron como transparentes en CSS las secciones internas de Piercings y Booking que cubrían el fondo animado global, destapando el humo de WebGL en estas páginas.
-* **Solución de Congelamiento (Render Freeze):** Agregada validación de visibilidad de elementos (`!wrapper || wrapper.offsetWidth === 0`) en el bucle del slider infinito para evitar transformaciones NaN en GPU al navegar fuera de Home.
+* **Corrección de Menú de Navegación Móvil:** Se alineó el JavaScript con el archivo de estilos CSS al cambiar el toggling de la clase `mobile-open` a `active` sobre `#nav-menu`, permitiendo que el menú se abra y se auto-cierre al tocar cualquier enlace.
+* **Autoplay de Video Hero en Móviles:** Se eliminó la regla CSS (`display: none`) que ocultaba el iframe en pantallas pequeñas y se añadieron los atributos y parámetros de reproducción en línea (`playsinline=1` en URL, y atributos HTML como `playsinline`, `webkit-playsinline`, `autoplay`, `muted`, `loop`, `preload="auto"`) al iframe del video Hero de YouTube.
+* **Corrección de Rutas de Imágenes:** Se corrigió la ruta de las imágenes del Film Strip de la página de Inicio, reemplazando `../TATTOO/` por la ruta local correcta del proyecto `tattoo/` para garantizar su carga en Cloudflare Pages.
+* **Creación de Repositorio en GitHub:** Proyecto subido y alojado en la dirección `https://github.com/mangocontaec/stattos2026` para conexión automática con el hosting.
