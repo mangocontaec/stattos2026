@@ -223,7 +223,7 @@ function initMobileMenu() {
     toggleBtn.addEventListener('click', () => {
         const isOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
         toggleBtn.setAttribute('aria-expanded', !isOpen);
-        navMenu.classList.toggle('mobile-open', !isOpen);
+        navMenu.classList.toggle('active', !isOpen);
         toggleBtn.classList.toggle('active', !isOpen);
     });
 
@@ -231,7 +231,7 @@ function initMobileMenu() {
     navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             toggleBtn.setAttribute('aria-expanded', 'false');
-            navMenu.classList.remove('mobile-open');
+            navMenu.classList.remove('active');
             toggleBtn.classList.remove('active');
         });
     });

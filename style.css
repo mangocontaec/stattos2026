@@ -613,11 +613,7 @@ header.scrolled {
     opacity: 0.85;
 }
 
-@media (max-width: 768px) {
-    .hero-video-iframe {
-        display: none;
-    }
-}
+
 
 .hero-overlay {
     position: absolute;
