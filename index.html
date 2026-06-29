@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATTOOS SOCIETY | Exquisite Underground Tattoo & Body Modification Studio</title>
+    <meta name="description" content="Santurario de excelencia técnica y estética underground en Los Ángeles. Tatutajes de realismo, neotradicional, fineline y modificaciones corporales de grado médico.">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Load Three.js dynamically for preloader shader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
+</head>
+<body>
+    <!-- Global WebGL Smoke Background -->
+    <canvas class="unified-bg-canvas" id="global-bg-canvas" style="position: fixed; inset: 0; z-index: -2; pointer-events: none; width: 100vw; height: 100vh;" aria-hidden="true"></canvas>
+
+    <!-- --- Shader Intro Preloader --- -->
+    <div id="intro-preloader">
+        <div id="shader-container"></div>
+        <div class="preloader-overlay"></div>
+        <div class="preloader-content">
+            <img class="preloader-logo-img" src="LOGO-STATTOOS.png" alt="STATTOOS SOCIETY">
+        </div>
+    </div>
+
+    <!-- --- Header Navigation Bar --- -->
+    <header id="site-header">
+        <div class="container navbar">
+            <a href="#home" class="logo-link" id="nav-logo">
+                <img class="nav-logo-img" src="LOGO-STATTOOS.png" alt="STATTOOS SOCIETY">
+            </a>
+            
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item active" data-page="home"><a href="#home">Home</a></li>
+                    <li class="nav-item" data-page="artists"><a href="#artists">Artists</a></li>
+                    <li class="nav-item" data-page="conventions"><a href="#conventions">Conventions</a></li>
+                    <li class="nav-item" data-page="piercings"><a href="#piercings">Piercings</a></li>
+                    <li class="nav-item" data-page="booking"><a href="#booking">Booking</a></li>
+                </ul>
+            </nav>
+
+            <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+                <!-- Custom morphing SVG menu icon -->
+                <svg class="menu-toggle-svg" viewBox="0 0 32 32" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px;">
+                    <path class="menu-path-dash" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22" />
+                    <path class="menu-path-middle" d="M7 16 27 16" />
+                </svg>
+            </button>
+
+            <a href="#booking" class="btn btn-primary" id="header-cta">BOOK NOW</a>
+        </div>
+    </header>
+
+    <!-- 
+    ========================================================================
+       SPA VIRTUAL SECTIONS
+    ========================================================================
+    -->
+
+    <!-- --- 1. HOME SECTION (#home) --- -->
+    <section id="home" class="page-section active">
+        <div class="hero-home">
+            <div class="hero-home-bg">
+                <div class="hero-video-fallback" style="background-image: url('https://images.unsplash.com/photo-1598153346810-8b0daaed6c46?auto=format&fit=crop&w=1920&q=80');"></div>
+                <iframe class="hero-video-iframe" 
+                        src="https://www.youtube.com/embed/EtTl2sXKKYA?autoplay=1&mute=1&loop=1&playlist=EtTl2sXKKYA&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1" 
+                        title="Hero Background Video"
+                        frameborder="0" 
+                        allow="autoplay; encrypted-media" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title uppercase">MAKING FRIENDS<br><span class="text-red">NO CLIENTS</span></h1>
+            </div>
+            <div class="scroll-down" onclick="document.getElementById('masters-intro').scrollIntoView({behavior: 'smooth'})">
+                <span>SCROLL DOWN</span>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+
+        <!-- ═══ UNIFIED BACKGROUND ZONE: Artistas + Galería + CTA ═══ -->
+        <div class="unified-bg-zone">
+            
+
+            <!-- Meet Our Masters -->
+            <div class="masters-section">
+                <div class="container">
+                    <div class="section-title-container" id="masters-intro">
+                        <span class="section-subtitle">LOS MEJORES ARTISTAS DEL ESTUDIO</span>
+                        <h2 class="section-title uppercase">CONOCE A NUESTROS ARTISTAS</h2>
+                    </div>
+                    <p class="masters-intro">Cada artista tiene un estilo único y una visión diferente. Descubre quién puede convertir tu próxima idea en una obra de arte permanente.</p>
+                    
+                    <div class="masters-grid">
+                        <!-- Master 1 -->
+                        <div class="master-card" onclick="window.location.hash = '#artist-profile'">
+                            <div class="master-img-wrapper">
+                                <img src="frank.jpg" alt="Frankliin" class="master-img">
+                            </div>
+                            <div class="master-info">
+                                <span class="master-specialization">REALISM ARTIST</span>
+                                <h3 class="master-name">FRANKLIIN</h3>
+                                <span class="view-portfolio-link">VER PORTAFOLIO</span>
+                            </div>
+                        </div>
+
+                        <!-- Master 2 -->
+                        <div class="master-card" onclick="window.location.hash = '#artist-profile'">
+                            <div class="master-img-wrapper">
+                                <img src="saris.jpg" alt="Saris Toro" class="master-img">
+                            </div>
+                            <div class="master-info">
+                                <span class="master-specialization">FINE LINE &amp; PIERCING ARTIST</span>
+                                <h3 class="master-name">SARIS TORO</h3>
+                                <span class="view-portfolio-link">VER PORTAFOLIO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Section — Film Strip Loop -->
+            <div class="gallery-section" id="gallery">
+                <div class="container">
+                    <div class="section-title-container">
+                        <span class="section-subtitle">LOS MEJORES ARTISTAS DEL ESTUDIO</span>
+                        <h2 class="section-title uppercase">TRABAJOS DE NUESTROS ARTISTAS</h2>
+                    </div>
+                    <p class="gallery-intro">
+                        Una selección de piezas realizadas por nuestros artistas. Explora estilos, detalles y composiciones reales del estudio.
+                    </p>
+                </div>
+
+                <!-- Film Strip — full width, no container -->
+                <div class="film-strip-wrapper" id="film-strip-wrapper">
+                    <div class="film-strip-track" id="film-strip-track">
+                        <!-- Set A -->
+                        <div class="film-strip-item"><img src="../TATTOO/658955318_27020283830906649_5090289939039690665_n.jpg" alt="Tattoo 1" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/673679131_27284668601134836_5800676656137250742_n.jpg" alt="Tattoo 2" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/673962307_27284668577801505_1704395994635659186_n.jpg" alt="Tattoo 3" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/674085888_27284668437801519_5840378755391095688_n.jpg" alt="Tattoo 4" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/674196641_27284668341134862_6073177844151814818_n.jpg" alt="Tattoo 5" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/678988292_27375250502076645_2096502396638677993_n.jpg" alt="Tattoo 6" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/723228908_18580349938062266_7524056536623623397_n.jpg" alt="Tattoo 7" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/731339033_28113706961564325_41816633548126_n.jpg" alt="Tattoo 8" draggable="false"></div>
+                        <!-- Set B (clone for infinite loop) -->
+                        <div class="film-strip-item"><img src="../TATTOO/658955318_27020283830906649_5090289939039690665_n.jpg" alt="Tattoo 1" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/673679131_27284668601134836_5800676656137250742_n.jpg" alt="Tattoo 2" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/673962307_27284668577801505_1704395994635659186_n.jpg" alt="Tattoo 3" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/674085888_27284668437801519_5840378755391095688_n.jpg" alt="Tattoo 4" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/674196641_27284668341134862_6073177844151814818_n.jpg" alt="Tattoo 5" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/678988292_27375250502076645_2096502396638677993_n.jpg" alt="Tattoo 6" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/723228908_18580349938062266_7524056536623623397_n.jpg" alt="Tattoo 7" draggable="false"></div>
+                        <div class="film-strip-item"><img src="../TATTOO/731339033_28113706961564325_41816633548126_n.jpg" alt="Tattoo 8" draggable="false"></div>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- CTA Shared component -->
+            <div class="cta-shared-placeholder"></div>
+        </div>
+    </section>
+
+    <!-- --- 2. ARTISTS DIRECTORY SECTION (#artists) --- -->
+    <section id="artists" class="page-section">
+
+        <div class="masters-section" style="padding-top: 140px; padding-bottom: 80px; position: relative; z-index: 2;">
+            <div class="container">
+                <div class="section-title-container" style="text-align: center; margin-bottom: 40px;">
+                    <span class="section-subtitle">LOS MEJORES ARTISTAS DEL ESTUDIO</span>
+                    <h2 class="section-title uppercase">CONOCE A NUESTROS ARTISTAS</h2>
+                </div>
+                <p class="masters-intro" style="text-align: center; max-width: 800px; margin: 0 auto 60px auto; color: var(--color-grey);">Cada artista tiene un estilo único y una visión diferente. Descubre quién puede convertir tu próxima idea en una obra de arte permanente.</p>
+                
+                <div class="masters-grid">
+                    <!-- Master 1 -->
+                    <div class="master-card" onclick="window.location.hash = '#artist-frank'">
+                        <div class="master-img-wrapper">
+                            <img src="frank.jpg" alt="Frankliin" class="master-img">
+                        </div>
+                        <div class="master-info">
+                            <span class="master-specialization">REALISM ARTIST</span>
+                            <h3 class="master-name">FRANKLIIN</h3>
+                            <span class="view-portfolio-link">VER PORTAFOLIO</span>
+                        </div>
+                    </div>
+
+                    <!-- Master 2 -->
+                    <div class="master-card" onclick="window.location.hash = '#artist-profile'">
+                        <div class="master-img-wrapper">
+                            <img src="saris.jpg" alt="Saris Toro" class="master-img">
+                        </div>
+                        <div class="master-info">
+                            <span class="master-specialization">FINE LINE &amp; PIERCING ARTIST</span>
+                            <h3 class="master-name">SARIS TORO</h3>
+                            <span class="view-portfolio-link">VER PORTAFOLIO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking CTA Section under the cards -->
+                <div class="artists-booking-cta-container">
+                    <h3 class="artists-cta-text">AGENDA TU CITA PARA PODER ASESORARTE SOBRE TU IDEA.</h3>
+                    <a href="#booking" class="btn btn-artists-cta">AGENDA TU CITA</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- 3. ARTIST PROFILE SECTION (#artist-profile) --- -->
+    <section id="artist-profile" class="page-section">
+        <div class="profile-hero">
+            <div class="profile-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1598153346810-8b0daaed6c46?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-overlay"></div>
+            <div class="container profile-hero-content">
+                <span class="profile-tag">MASTER ARTIST</span>
+                <h1 class="profile-name">ELARA VANCE</h1>
+                <div class="profile-details-row">
+                    <div class="profile-detail-item">Specialization: <strong>Hyper-Realism & Fineline</strong></div>
+                    <div class="profile-detail-item">Experience: <strong>12 Years</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content-area">
+            <div class="container profile-portfolio-layout">
+                <!-- Left Grid Portfolio -->
+                <div>
+                    <div class="section-title-container" style="text-align: left; margin-bottom: 40px;">
+                        <span class="section-subtitle">ELITE COLLECTION</span>
+                        <h2 class="section-title uppercase">PORTFOLIO</h2>
+                    </div>
+                    <div class="profile-grid-container">
+                        <!-- Portfolio items -->
+                        <div class="profile-portfolio-item">
+                            <img src="https://images.unsplash.com/photo-1590246814883-57f511e76523?auto=format&fit=crop&w=600&q=80" alt="Work 1">
+                        </div>
+                        <div class="profile-portfolio-item">
+                            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=600&q=80" alt="Work 2">
+                        </div>
+                        <div class="profile-portfolio-item">
+                            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=600&q=80" alt="Work 3">
+                        </div>
+                        <div class="profile-portfolio-item">
+                            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80" alt="Work 4">
+                        </div>
+                        <div class="profile-portfolio-item">
+                            <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?auto=format&fit=crop&w=600&q=80" alt="Work 5">
+                        </div>
+                        <div class="profile-portfolio-item">
+                            <img src="https://images.unsplash.com/photo-1542382257-80dedb725088?auto=format&fit=crop&w=600&q=80" alt="Work 6">
+                        </div>
+                    </div>
+                </div>
+
+                                <!-- Right sidebar with vertical outline text -->
+                <div class="profile-sidebar">
+                    <span class="profile-vertical-name">VANCE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- 3.1. FRANKLIN PROFILE SECTION (#artist-frank) --- -->
+    <section id="artist-frank" class="page-section">
+
+        <div class="profile-hero">
+            <div class="profile-hero-bg" style="background-image: url('frank.jpg');"></div>
+            <div class="hero-overlay"></div>
+            <div class="container profile-hero-content">
+                <span class="profile-tag" style="color: var(--color-red);">BLACK & GREY ARTIST</span>
+                <h1 class="profile-name">FRANKLIN</h1>
+                <div class="profile-details-row">
+                    <div class="profile-detail-item">Especialidad: <strong>Black & Grey</strong></div>
+                    <div class="profile-detail-item">Experiencia: <strong>20+ Años</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content-area" style="background: transparent;">
+            <div class="container frank-portfolio-layout">
+                <div class="section-title-container" style="text-align: center; margin-bottom: 40px;">
+                    <h2 class="section-title uppercase">PORTFOLIO</h2>
+                </div>
+                <p class="premium-artist-desc-profile" style="margin-bottom: 50px; max-width: 800px; color: var(--color-grey); font-size: 17px; line-height: 1.8; text-align: center; margin-left: auto; margin-right: auto;">
+                    Artista especializado en Black & Grey con más de 20 años de experiencia. Ha obtenido importantes reconocimientos nacionales y actualmente participa en convenciones internacionales. Es el creador de Ink The Garden City, la convención de tatuajes más grande del Ecuador.
+                </p>
+                <div class="profile-grid-container" id="frank-portfolio-grid">
+                    <!-- Loaded dynamically by app.js -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- 4. CONVENTIONS SECTION (#conventions) --- -->
+    <section id="conventions" class="page-section">
+        <div class="conventions-hero">
+            <div class="conventions-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1513829096999-4978602297f7?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-overlay"></div>
+            <div class="conventions-hero-content">
+                <span class="conventions-subtitle">GLOBAL CHRONICLES</span>
+                <h1 class="conventions-main-title">CONVENTIONS<span class="text-red">.</span></h1>
+                <p class="conventions-desc">A visual odyssey across five continents. We don't just attend; we redefine the boundaries of skin art on the world's most prestigious stages.</p>
+            </div>
+        </div>
+
+        <!-- Chronological Timeline Scroll List -->
+        <div class="timeline-section">
+            <div class="container">
+                <!-- Event 1 -->
+                <div class="timeline-event-block">
+                    <div class="timeline-img-side">
+                        <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=800&q=80" alt="London 2023" class="timeline-main-img">
+                        <div class="timeline-tag-badge">01 LONDON 2023</div>
+                    </div>
+                    <div class="timeline-text-side">
+                        <h2 class="timeline-event-title">THE FOG & THE FLAME</h2>
+                        <p class="timeline-event-desc">We brought our signature dark-realism style to the historic heart of London. Winning 'Best of Show' and establishing critical connections within the European circuit. Two intense days of technical excellence and master collaborations.</p>
+                        <div class="timeline-previews">
+                            <img src="https://images.unsplash.com/photo-1590246814883-57f511e76523?auto=format&fit=crop&w=300&q=80" alt="London detail 1">
+                            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=300&q=80" alt="London detail 2">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="timeline-event-block reverse">
+                    <div class="timeline-text-side">
+                        <h2 class="timeline-event-title" style="color: var(--color-red);">NEO-EDO SOUL</h2>
+                        <p class="timeline-event-desc">A deep dive into traditional Japanese methodologies infused with contemporary industrial aesthetics. The Tokyo gathering was a meeting of historical lineages and aggressive, underground subcultures under high-contrast neon lighting.</p>
+                        <div class="timeline-previews">
+                            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=300&q=80" alt="Tokyo detail 1">
+                            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=300&q=80" alt="Tokyo detail 2">
+                        </div>
+                    </div>
+                    <div class="timeline-img-side">
+                        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80" alt="Tokyo 2023" class="timeline-main-img">
+                        <div class="timeline-tag-badge">TOKYO 2023 02</div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="timeline-event-block">
+                    <div class="timeline-img-side">
+                        <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80" alt="New York 2022" class="timeline-main-img">
+                        <div class="timeline-tag-badge">03 NEW YORK 2022</div>
+                    </div>
+                    <div class="timeline-text-side">
+                        <h2 class="timeline-event-title">CONCRETE CANVAS</h2>
+                        <p class="timeline-event-desc">Taking over a historic warehouse exhibition booth in Brooklyn, our resident artists demonstrated raw street aesthetics meets elite fine-art execution. An archive of five massive back pieces completed live during the three-day convention.</p>
+                        <div class="timeline-previews">
+                            <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?auto=format&fit=crop&w=300&q=80" alt="New York detail 1">
+                            <img src="https://images.unsplash.com/photo-1542382257-80dedb725088?auto=format&fit=crop&w=300&q=80" alt="New York detail 2">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="timeline-event-block reverse">
+                    <div class="timeline-text-side">
+                        <h2 class="timeline-event-title">THE HIGH FASHION INK</h2>
+                        <p class="timeline-event-desc">In Milan, the boundaries of classical art and skin design dissolved completely. We presented our catalog alongside luxury fashion houses, showcasing modern body modification as the ultimate statement of sovereign identity and style.</p>
+                        <div class="timeline-previews">
+                            <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=300&q=80" alt="Milan detail 1">
+                            <img src="https://images.unsplash.com/photo-1598153346810-8b0daaed6c46?auto=format&fit=crop&w=300&q=80" alt="Milan detail 2">
+                        </div>
+                    </div>
+                    <div class="timeline-img-side">
+                        <img src="https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=800&q=80" alt="Milan 2023" class="timeline-main-img">
+                        <div class="timeline-tag-badge">MILAN 2023 04</div>
+                    </div>
+                </div>
+
+                <!-- Event 5 -->
+                <div class="timeline-event-block">
+                    <div class="timeline-img-side">
+                        <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=800&q=80" alt="Los Angeles 2021" class="timeline-main-img">
+                        <div class="timeline-tag-badge">05 LOS ANGELES 2021</div>
+                    </div>
+                    <div class="timeline-text-side">
+                        <h2 class="timeline-event-title">CITY OF ANGELS</h2>
+                        <p class="timeline-event-desc">Our flagship homecoming showcase. An elite banquet event gathering the most prominent collectors of Southern California. A celebration of precision craft and community alignment in our local sanctuary.</p>
+                        <div class="timeline-previews">
+                            <img src="https://images.unsplash.com/photo-1580129924495-2314a870e2be?auto=format&fit=crop&w=300&q=80" alt="LA detail 1">
+                            <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=300&q=80" alt="LA detail 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Join the Circle -->
+        <div class="join-circle-section">
+            <div class="container">
+                <h2 class="join-title">JOIN THE CIRCLE<span class="text-red">.</span></h2>
+                <p class="join-desc">Witness the mastery in person. Secure your spot for our next global appearance or book a private session at our flagship studio.</p>
+                <div class="join-btn-row">
+                    <button class="btn btn-primary" onclick="window.location.hash = '#booking'">VIEW UPCOMING TOUR</button>
+                    <button class="btn btn-secondary" onclick="window.location.hash = '#booking'">BOOK A SESSION</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- 5. PIERCINGS SECTION (#piercings) --- -->
+    <section id="piercings" class="page-section">
+        <div class="piercing-hero">
+            <div class="piercing-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1582233479366-6d38bc390a08?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-overlay"></div>
+            <div class="container piercing-hero-content">
+                <h1 class="piercing-hero-title">Internal Order.<br><span class="text-red">External Scale.</span></h1>
+                <p class="piercing-hero-desc">We don't just modify bodies; we architect identities. Experience the pinnacle of technical excellence in an environment of absolute intimacy.</p>
+                <div class="piercing-hero-btn-row">
+                    <button class="btn btn-primary" onclick="document.getElementById('sovereignty').scrollIntoView({behavior: 'smooth'})">EXPLORE THE GALLERY</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('ethos').scrollIntoView({behavior: 'smooth'})">OUR ETHOS</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Space of Sovereignty -->
+        <div class="sovereignty-section" id="sovereignty">
+            <div class="container">
+                <div class="sovereignty-intro">
+                    <h2 class="sovereignty-title">Space of Sovereignty</h2>
+                    <p class="sovereignty-desc">Explore our curated selection of modifications, categorized by the architectural intent they serve...</p>
+                </div>
+
+                <!-- Showcase filters -->
+                <div class="sovereignty-filter-bar">
+                    <button class="sovereignty-filter-btn active" data-filter="all">ALL WORKS</button>
+                    <button class="sovereignty-filter-btn" data-filter="facial">FACIAL</button>
+                    <button class="sovereignty-filter-btn" data-filter="advanced">ADVANCED MODS</button>
+                    <button class="sovereignty-filter-btn" data-filter="steel">SURGICAL STEEL</button>
+                </div>
+
+                <!-- Sovereignty Showcase Grid -->
+                <div class="sovereignty-grid" id="piercing-grid">
+                    <!-- Curated Ear (Wide) -->
+                    <div class="sovereignty-card wide" data-cat="steel">
+                        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80" alt="Curated Ear">
+                        <div class="sovereignty-overlay-info">
+                            <h4 class="sovereignty-card-title">CURATED EAR</h4>
+                            <span class="sovereignty-card-subtitle">Architectural Precision</span>
+                        </div>
+                    </div>
+
+                    <!-- Facial Mods (Tall) -->
+                    <div class="sovereignty-card tall" data-cat="facial">
+                        <img src="https://images.unsplash.com/photo-1596516109370-29001ec8ec36?auto=format&fit=crop&w=800&q=80" alt="Facial Mods">
+                        <div class="sovereignty-overlay-info">
+                            <h4 class="sovereignty-card-title">FACIAL MODS</h4>
+                            <span class="sovereignty-card-subtitle">Sovereign Flow</span>
+                        </div>
+                    </div>
+
+                    <!-- Minimalist Scale -->
+                    <div class="sovereignty-card" data-cat="steel">
+                        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" alt="Minimalist Scale">
+                        <div class="sovereignty-overlay-info">
+                            <h4 class="sovereignty-card-title">MINIMALIST SCALE</h4>
+                            <span class="sovereignty-card-subtitle">Precision Scale</span>
+                        </div>
+                    </div>
+
+                    <!-- Technical Mastery -->
+                    <div class="sovereignty-card" data-cat="advanced">
+                        <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=600&q=80" alt="Technical Mastery">
+                        <div class="sovereignty-overlay-info">
+                            <h4 class="sovereignty-card-title">TECHNICAL MASTERY</h4>
+                            <span class="sovereignty-card-subtitle">Sterile Execution</span>
+                        </div>
+                    </div>
+
+                    <!-- Dermal Anchoring (Wide) -->
+                    <div class="sovereignty-card wide" data-cat="advanced">
+                        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Dermal Anchoring">
+                        <div class="sovereignty-overlay-info">
+                            <h4 class="sovereignty-card-title">DERMAL ANCHORING</h4>
+                            <span class="sovereignty-card-subtitle">Sub-dermal Integrity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ethos Section -->
+        <div class="clinical-ethos-section" id="ethos">
+            <div class="container clinical-grid">
+                <div class="clinical-left">
+                    <h3>From wellness-studio to Sovereignty</h3>
+                    <div class="clinical-bullets">
+                        <div class="clinical-bullet">
+                            <h5 class="clinical-bullet-title">THE BASELINE</h5>
+                            <p class="clinical-bullet-text">We strictly utilize surgical-grade implant-compliant titanium (ASTM F-136) and gold jewelry. Every procedure is performed in sterile, isolated cleanrooms.</p>
+                        </div>
+                        <div class="clinical-bullet">
+                            <h5 class="clinical-bullet-title">OUR PHILOSOPHY</h5>
+                            <p class="clinical-bullet-text">Body modification is a ritual of claiming sovereignty. We prioritize tissue health, structural alignment, and long-term viability.</p>
+                        </div>
+                    </div>
+                    <div class="medical-badge">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span class="medical-badge-text">CERTIFIED MEDICAL-GRADE<br>STERILITY STANDARDS</span>
+                    </div>
+                </div>
+                <div class="clinical-right">
+                    <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=80" alt="Client showing jewelry">
+                    <div class="clinical-study-label">CASE STUDY #42 • Full Curation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consultation Form -->
+        <div class="application-section">
+            <span class="application-bg-text">CONSULTATION</span>
+            <div class="container">
+                <div class="application-container">
+                    <h3 class="application-title">Ready for your transformation?</h3>
+                    <form id="piercing-consultation-form">
+                        <div class="form-group">
+                            <label for="p-name">FULL NAME</label>
+                            <input type="text" id="p-name" class="form-control" placeholder="YOUR FULL NAME" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="p-email">EMAIL ADDRESS</label>
+                            <input type="email" id="p-email" class="form-control" placeholder="YOUR EMAIL ADDRESS" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="p-vision">DESCRIBE YOUR VISION</label>
+                            <textarea id="p-vision" class="form-control" placeholder="TELL US ABOUT THE MODIFICATIONS AND STYLE YOU DESIRE..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">SUBMIT APPLICATION</button>
+                    </form>
+                    <div id="p-form-success" style="display: none; text-align: center; color: var(--color-red); font-weight: 700; margin-top: 20px;">
+                        <i class="fa-solid fa-circle-check"></i> APPLICATION SUBMITTED SUCCESSFULLY. WE WILL CONTACT YOU VIA EMAIL.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- 6. BOOKING SECTION (#booking) --- -->
+    <section id="booking" class="page-section">
+        <div class="booking-fullscreen-view">
+            
+            <!-- Global Map Layer -->
+            <div id="hologram-container" class="hologram-layer">
+                <div class="hologram-glow"></div>
+                <!-- Globe.gl container -->
+                <div id="globe-canvas" style="width: 1000px; height: 1000px;"></div>
+                <div id="target-pin" class="hologram-pin"><i class="fa-solid fa-location-crosshairs"></i></div>
+            </div>
+
+            <div class="container booking-content-grid">
+                
+                <!-- Left Panel -->
+                <div class="booking-left-panel">
+                    <span class="booking-subtitle">LISTO PARA TU NUEVO TATTOO O PIERCING?</span>
+                    <h1 class="booking-mega-title uppercase">AGENDA<br>TU CITA</h1>
+                    <p class="booking-desc-text" style="color: var(--color-grey); font-size: 1.1rem; margin-top: -15px; margin-bottom: 30px;">Escríbenos para poder asesorarte y agendar tu cita.</p>
+                    <div class="booking-address">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p>Babacos y Guaytambos<br>Ambato, Ecuador</p>
+                    </div>
+                    
+                    <a href="https://wa.link/awj2rm" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-premium">
+                        <span class="btn-wsp-icon"><i class="fa-brands fa-whatsapp"></i></span>
+                        <span class="btn-wsp-text">AGENDA TU CITA</span>
+                        <span class="btn-sweep-light" aria-hidden="true"></span>
+                    </a>
+                </div>
+
+                <!-- Right Panel -->
+                <div class="booking-right-panel" id="map-target-card">
+                    <div class="glass-map-card">
+                        <!-- Google Maps Iframe (Hidden initially) -->
+                        <iframe id="google-maps-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3990.5820372456015!2d-78.63660315!3d-1.24151745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d3829aa83e8bd3%3A0xde5695b15a72fab8!2sBabacos%20y%20Guaytambos%2C%20Ambato!5e0!3m2!1ses!2sec!4v1700000000000!5m2!1ses!2sec" style="border:0; width: 100%; height: 100%; position: absolute; top: 0; left: 0; border-radius: 18px; opacity: 0; pointer-events: none; z-index: 5;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        
+                        <!-- Hologram animates into this placeholder -->
+                        <div class="map-target-placeholder"></div>
+                        <a href="https://maps.app.goo.gl/hTmowE5twWiUH5XSA" target="_blank" rel="noopener noreferrer" class="btn-maps-link" style="position: relative; z-index: 10;">
+                            <i class="fa-solid fa-location-arrow"></i> CÓMO LLEGAR
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ═══ UNIFIED PREMIUM FOOTER (Shared Component) ═══ -->
+    <div id="site-footer"></div>
+
+    <!-- Portfolio Modal -->
+    <div id="portfolio-modal" class="portfolio-modal" style="display: none;">
+        <div class="portfolio-modal-overlay" onclick="closePortfolioModal()"></div>
+        <div class="portfolio-modal-content">
+            <button class="portfolio-modal-close" onclick="closePortfolioModal()">&times;</button>
+            <div class="portfolio-masonry" id="portfolio-masonry-grid">
+                <!-- Images injected here by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Container -->
+    <div id="gallery-lightbox" class="lightbox-overlay" style="display: none;">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="Enlarged Tattoo Work">
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="//unpkg.com/globe.gl"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="app.js"></script>
+    <script src="cta.js"></script>
+    <script src="footer.js"></script>
+</body>
+</html>
+
